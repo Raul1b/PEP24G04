@@ -15,11 +15,66 @@ din vitța m#a av#ntu$%a!a. &@ia$ !i a&um, dupa a&#!t int#$va^
 n%u a&#^ p%t%p b$u!& d# bu&u$i#, uimi$# !i n#in&$#d#$# &a$# mi-a
 &ufundat &u t%tu^ mint#a."""
 
-decrypt = """! = s
-@ = h
-# = e
-$ = r
-^ = l
-% = o
-& = c
-* = k"""
+char = {'!': 's', '@': 'h', '#': 'e', '$': 'r', '^': 'l', '%': 'o', '&': 'c', '*': 'k'}
+
+
+def decrypt(encrypted_text: str, decryption_method: dict):
+    decrypted_text = ""
+    for character in encrypted_text:
+        if character in decryption_method:
+            decrypted_text += decryption_method[character]
+        else:
+            decrypted_text += character
+    return decrypted_text
+
+
+dec_text = decrypt(text, char)
+
+print(dec_text)
+sentences = dec_text.split('.')
+for sentence in sentences:
+    print(80 * '#')
+    # first = ''
+    new_sentance = ''
+    var1 = True
+    for c in sentence:
+        c: str
+        if c.isalpha() and var1:
+            c = c.upper()
+            var1 = False
+        new_sentance += c
+    # sentence_gen = sentence.__iter__()
+    # new_sentance = ''
+    # for c in sentence_gen:
+    #     if c.isalpha():
+    #         c = c.upper()
+    #         new_sentance += c
+    #         new_sentance += ''.join(sentence_gen)
+    #         break
+    #     else:
+    #         new_sentance += c
+    # for c in sentence_gen:
+    #     if not c.isalpha():
+    #         next(sentence_gen)
+
+    print(new_sentance)
+
+# c)
+words = dec_text.split()
+print(words)
+new_words = []
+for word in words:
+    word = word.strip(',')
+    if word.isnumeric():
+        continue
+    new_words.append(word)
+print(new_words)
+
+# d)
+print('short words')
+result = []
+for word in new_words:
+    if 5 <= len(word) <= 8:
+        result.append(word)
+print(set(result))
+
