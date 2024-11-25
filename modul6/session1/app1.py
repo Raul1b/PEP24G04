@@ -2,12 +2,14 @@ class Product:
 
     def __init__(self, name=None, price=None, stock=None):
         if name and price and stock:
-            pass
+            self.name = name
+            self.price = price
+            self.stock = stock
         else:
             self.name, self.price, self.stock = input("Give (name, price, stock) for product:").split(',')
 
     def __repr__(self):
-        return (f"{self.__class__.__name__}: ({self.name},{self.price},{self.stock})")
+        return f"{self.__class__.__name__}: ({self.name},{self.price},{self.stock})"
 
     def __str__(self):
         return (f"Nume: {self.name} \n"
@@ -37,6 +39,23 @@ class Shop:
     product_menu_dict = {1: "Adaugare", 2: "Vizualizare", 3: "Iesire la meniul principal"}
     categories = [Category('pantofi'), Category('haine')]
 
+    def __show_menu(self):
+        pass
+
+    def _add_product(self):
+        category = input("Introduceti numele categoriei:")
+        product = input("Introduceti numele produsului")
+        price = input("Introduceti pretul produsului")
+        stock = input("Introduceti stocul produsului")
+        for cat in self.categories:
+            if cat.category_name == category:
+                cat.products.append(Product(product, price, stock))
+                break
+        else:
+            new_cat = Category(category)
+            new_cat.products.append(Product(product, price, stock))
+            self.categories.append(new_cat)
+
     def products_menu(self):
         # code here
         while True:
@@ -45,15 +64,12 @@ class Shop:
                 print(f'\t{key}: {value}')
             selection = input('Introduceti optiunea:')
             if selection == '1':
-                category = input("Introduceti numele categoriei:")
-                product = input("Introduceti numele produsului")
-                price = input("Introduceti pretul produsului")
-                stock = input("Introduceti stocul produsului")
-                for cat in self.categories:
-                    if cat.category_name == category:
-                        cat.products.append(Product(product, price, stock))
+                self._add_product()
             elif selection == '2':
-                print(self.categories)
+                for cat in self.categories:
+                    print(40 * '=' + '\n' + "Categoria " + cat.category_name.capitalize() + '\n' + 40 * '=')
+                    for prod in cat.products:
+                        print(prod)
             elif selection == '3':
                 break
 
