@@ -4,10 +4,14 @@ class Product:
         self.name, self.price, self.stock = input("Give (name, price, stock) for product:").split(',')
 
     def __repr__(self):
-        pass
+        return (f"{self.__class__.__name__}: ({self.name},{self.price},{self.stock})")
 
     def __str__(self):
-        pass
+        return (f"Nume: {self.name} \n"
+                f"Pret: {self.price} \n"
+                f"Stoc: {self.stock} \n"
+                f"{40 * '-'}")
+
 
 class Category:
 
@@ -20,6 +24,20 @@ class Category:
         product = Product()
         self.products.append(product)
 
-class Shop:
-    pass
+    # ADD method to represent category and to convert to string
 
+
+class Shop:
+    main_menu_message = 'Bun venit la magazinul Pycharm'
+    main_menu_dict = {1: "Category", 2: "Produse", 3: "Iesire"}
+    categories = [Category('pantofi')]
+
+    def run(self):
+        while True:
+            print(self.main_menu_message)
+            for key, value in self.main_menu_dict.items():
+                print(f'\t{key}: {value}')
+            selection = input('Alegeti optiunea:')
+            if selection == '1':
+                for category in self.categories:
+                    print(category)
