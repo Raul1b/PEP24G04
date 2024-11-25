@@ -24,13 +24,18 @@ class Category:
         product = Product()
         self.products.append(product)
 
-    # ADD method to represent category and to convert to string
+    def __str__(self):
+        return f"--- {self.category_name.capitalize()}"
 
 
 class Shop:
     main_menu_message = 'Bun venit la magazinul Pycharm'
     main_menu_dict = {1: "Category", 2: "Produse", 3: "Iesire"}
-    categories = [Category('pantofi')]
+    categories = [Category('pantofi'), Category('haine')]
+
+    def products_menu(self):
+        # code here
+        pass
 
     def run(self):
         while True:
@@ -39,5 +44,8 @@ class Shop:
                 print(f'\t{key}: {value}')
             selection = input('Alegeti optiunea:')
             if selection == '1':
+                print(40 * '=' + '\n' + Category.__name__.upper().center(40, '=') + '\n' + 40 * '=')
                 for category in self.categories:
                     print(category)
+            elif selection == '2':
+                self.products_menu()
