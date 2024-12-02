@@ -1,6 +1,5 @@
 class Masina:
-    def __init__(self, marca: str, usi: int, culoare: str, an:
-    int, pret: float):
+    def __init__(self, marca: str, usi: int, culoare: str, an: int, pret: float):
         self.marca = marca
         self.usi = usi
         self.culoare = culoare
@@ -21,3 +20,4 @@ masina7 = Masina("Volvo", 4, "gri", 2017, 27000)
 masini = [masina7, masina6, masina5, masina4, masina3, masina1, masina2]
 
 # sum(map(function, masini))/len(masini)
+print(sum(map(lambda masina: masina.get_pret(), masini)) / len(masini))
