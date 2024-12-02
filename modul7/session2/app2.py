@@ -1,3 +1,6 @@
+from email.policy import default
+
+
 class Masina:
     def __init__(self, marca: str, usi: int, culoare: str, an:
     int, pret: float):
@@ -6,6 +9,9 @@ class Masina:
         self.culoare = culoare
         self.an = an
         self.__pret = pret
+
+    def __add__(self, other):
+        return Masina('', 0, '', 0, self.get_pret() + other.get_pret())
 
     def get_pret(self):
         return self.__pret
@@ -22,3 +28,5 @@ masini = [masina7, masina6, masina5, masina4, masina3, masina1, masina2]
 
 # sum(masini)/len(masini)
 # masina7 + masina6 + masina5 + masina4 + masina3 + masina1 + masina2
+
+print(sum(masini, Masina('', 0, '', 0, 0.0)).get_pret()/len(masini))
