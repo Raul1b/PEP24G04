@@ -4,6 +4,9 @@ class Angajat:
         self.salar = salar
         self.departament = departament
 
+    def crestere_salar(self, procent):
+        self.salar = self.salar * (100 + procent) / 100
+
     def __str__(self):
         return f"Nume: {self.nume}, Salar: {self.salar}. Departament : {self.departament}"
 
@@ -12,7 +15,7 @@ class Angajat:
 
 
 class Angajati:
-    lista_angajati = []
+    lista_angajati: list[Angajat] = []
 
     def adauga_angajati(self, *args):
         self.lista_angajati.extend(list(args))
@@ -24,12 +27,20 @@ class Angajati:
     def get_angajati_dep(self, departament):
         return list(filter(lambda ang: ang.departament == departament, self.lista_angajati))
 
+    def crestere_salar(self, procent):
+        # for ang in self.lista_angajati:
+        #     ang.crestere_salar(procent)
+        list(map(lambda a: a.crestere_salar(procent), self.lista_angajati))
+
 
 angajati = Angajati()
 angajati.adauga_angajati(
-    Angajat("George", "1000", "HR"),
-    Angajat("Alex", "2000", 'instalator')
+    Angajat("George", 1000, "HR"),
+    Angajat("Alex", 2000, 'instalator')
 )
 angajati.detalii_angajat()
 
 print(angajati.get_angajati_dep("HR"))
+
+angajati.crestere_salar(8)
+angajati.detalii_angajat()
